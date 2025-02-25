@@ -8,7 +8,7 @@ public class TimeView : MonoBehaviour
 
     private void Update()
     {
-        float currentTime = TimeManager.Instance.Time;
+        float currentTime = TimeManager.Instance.TimeLimit;
 
         int minutes = Mathf.FloorToInt(currentTime / 60f);
         int seconds = Mathf.FloorToInt(currentTime % 60f);

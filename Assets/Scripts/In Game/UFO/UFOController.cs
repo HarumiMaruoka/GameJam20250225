@@ -15,6 +15,7 @@ public class UFOController : MonoBehaviour
     // Components
     [NonSerialized] public Rigidbody2D Rigidbody2D;
     [NonSerialized] public UFOStats UFOStats;
+    [NonSerialized] public CircleCollider2D CircleCollider2D;
 
     // Stats
     public StatsType DefaultStatsType;
@@ -24,11 +25,12 @@ public class UFOController : MonoBehaviour
     [Expandable] public UFOStats UFOStatsY;
 
     [NonSerialized] public UFOStats AdditionalStats;
+    [NonSerialized] public UFOStats MultipleStats;
 
-    public float MaxSpeed => UFOStats.MaxSpeed + AdditionalStats.MaxSpeed;
-    public float Acceleration => UFOStats.Acceleration + AdditionalStats.Acceleration;
-    public float RotationSpeed => UFOStats.RotationSpeed + AdditionalStats.RotationSpeed;
-    public float Deceleration => UFOStats.Deceleration + AdditionalStats.Deceleration;
+    public float MaxSpeed => (UFOStats.MaxSpeed + AdditionalStats.MaxSpeed) * MultipleStats.MaxSpeed;
+    public float Acceleration => (UFOStats.Acceleration + AdditionalStats.Acceleration) * MultipleStats.Acceleration;
+    public float RotationSpeed => (UFOStats.RotationSpeed + AdditionalStats.RotationSpeed) * MultipleStats.RotationSpeed;
+    public float Deceleration => (UFOStats.Deceleration + AdditionalStats.Deceleration) * MultipleStats.Deceleration;
 
     // Properties
     [NonSerialized] public float CurrentSpeed;
@@ -38,8 +40,12 @@ public class UFOController : MonoBehaviour
     {
         UFOStats = GetStats(DefaultStatsType);
         Rigidbody2D = GetComponent<Rigidbody2D>();
+        CircleCollider2D = GetComponent<CircleCollider2D>();
+
         AdditionalStats = ScriptableObject.CreateInstance<UFOStats>();
-        AdditionalStats.Reset();
+        MultipleStats = ScriptableObject.CreateInstance<UFOStats>();
+        AdditionalStats.ResetStats();
+        MultipleStats.ResetStats(1);
     }
 
     public void Update()

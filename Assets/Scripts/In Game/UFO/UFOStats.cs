@@ -9,12 +9,12 @@ public class UFOStats : ScriptableObject
     public float RotationSpeed = 600f;
     public float Deceleration = 8f;
 
-    public void Reset()
+    public void ResetStats(float value = 0f)
     {
-        MaxSpeed = 0f;
-        Acceleration = 0f;
-        RotationSpeed = 0f;
-        Deceleration = 0f;
+        MaxSpeed = value;
+        Acceleration = value;
+        RotationSpeed = value;
+        Deceleration = value;
     }
 
     public static UFOStats operator +(UFOStats a, UFOStats b)

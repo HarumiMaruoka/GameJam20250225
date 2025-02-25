@@ -32,12 +32,12 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        if (Time > 0)
+        if (TimeLimit > 0)
         {
-            Time -= UnityEngine.Time.deltaTime;
-            if (Time <= 0)
+            TimeLimit -= UnityEngine.Time.deltaTime;
+            if (TimeLimit <= 0)
             {
-                Time = 0;
+                TimeLimit = 0;
                 OnTimeOver?.Invoke();
             }
         }
