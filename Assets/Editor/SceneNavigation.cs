@@ -20,10 +20,10 @@ public static class SceneNavigation
     }
     
     [MenuItem("Scene/Result")]
-    public static void OpenScene3()
+    public static void OpenScene2()
     {
         EditorSceneManager.SaveOpenScenes();
-        OpenScene(3);
+        OpenScene(2);
     }
 
     private static void OpenScene(int sceneIndex)
