@@ -1,25 +1,33 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEditor.Search;
 
 public class RankingManager : MonoBehaviour
 {
-    [SerializeField, Header("ƒ‰ƒ“ƒLƒ“ƒO‚Ì•\¦”")]
+    [SerializeField, Header("ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã®è¡¨ç¤ºæ•°")]
     private int _rankingNum;
 
-    [SerializeField, Header("ƒf[ƒ^•Û‘¶æ‚ÌKey‚Ì–¼‘O")]
+    [SerializeField, Header("ãƒ‡ãƒ¼ã‚¿ä¿å­˜å…ˆã®Keyã®åå‰")]
     private string _rankingDataName;
 
-    //ƒ‰ƒ“ƒLƒ“ƒO‚ÌList
+    //ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã®List
     [SerializeField]
-    private List<float> _ranking = new();
+    private Dictionary<string,float> _ranking = new();
 
-    public List<float> Ranking => _ranking;
+    public Dictionary<string, float> Ranking => _ranking;
+
+    private EnterUserName _enterUserName;
+
+    private void Start()
+    {
+        _enterUserName = FindAnyObjectByType<EnterUserName>();
+    }
 
     /// <summary>
-    /// •Û‘¶‚µ‚Ä‚ ‚éƒf[ƒ^‚ğQÆ‚µ‚Äƒ‰ƒ“ƒLƒ“ƒOì¬
+    /// ä¿å­˜ã—ã¦ã‚ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’å‚ç…§ã—ã¦ãƒ©ãƒ³ã‚­ãƒ³ã‚°ä½œæˆ
     /// </summary>
     public void Load()
     {
@@ -28,40 +36,42 @@ public class RankingManager : MonoBehaviour
             string[] saveDatas = PlayerPrefs.GetString(_rankingDataName).Split(',');
             foreach (string saveData in saveDatas)
             {
-                _ranking.Add(float.Parse(saveData));
+                string[] nameAndScore = saveData.Split(" ");
+                _ranking.Add(nameAndScore[0], float.Parse(nameAndScore[1]));
                 Debug.Log(saveData.ToString());
             }
-            _ranking.Sort();
-            _ranking.Reverse();
+            _ranking.OrderByDescending(x => x.Value);
             if (_ranking.Count > _rankingNum)
             {
                 for (int count = _ranking.Count; count > _rankingNum; count--)
                 {
-                    _ranking.Remove(_ranking.Min());
+                    float minValue = _ranking.Values.Min();
+                    _ranking.Remove(_ranking.FirstOrDefault(x => x.Value == minValue).Key);
                 }
             }
         }
     }
 
     /// <summary>
-    /// ƒZ[ƒu
+    /// ã‚»ãƒ¼ãƒ–
     /// </summary>
     public void Save()
     {
+
         if (!PlayerPrefs.HasKey(_rankingDataName))
         {
-            PlayerPrefs.SetString(_rankingDataName, ScoreManager.Score.ToString());
+            PlayerPrefs.SetString(_rankingDataName, _enterUserName.userName + " " + ScoreManager.Score.ToString());
         }
         else
         {
-            PlayerPrefs.SetString(_rankingDataName, PlayerPrefs.GetString(_rankingDataName) + "," + ScoreManager.Score.ToString());
+            PlayerPrefs.SetString(_rankingDataName, PlayerPrefs.GetString(_rankingDataName) + "," + _enterUserName.userName + " " + ScoreManager.Score.ToString());
         }
 
         if(_ranking.Count < _rankingNum)
         {
-            _ranking.Add(ScoreManager.Score);
+            _ranking.Add(_enterUserName.userName, ScoreManager.Score);
         }
-        Debug.Log(_rankingDataName + "‚É" + PlayerPrefs.GetString(_rankingDataName) + "‚ğƒZ[ƒu‚µ‚Ü‚µ‚½");
+        Debug.Log(_rankingDataName + "ã«" + PlayerPrefs.GetString(_rankingDataName) + "ã‚’ã‚»ãƒ¼ãƒ–ã—ã¾ã—ãŸ");
     }
 
     public void Delete()
