@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class BackButton : MonoBehaviour
 {
-    [SerializeField] private GameObject _rankingPanel;
+    [SerializeField] private GameObject _currentPanel;
     [SerializeField] private Button _button;
-    [SerializeField] private GameObject _rankingButton;
+    [SerializeField] private GameObject _nextPanel;
     private void Start()
     {
         _button.onClick.AddListener(OnClickBack);
@@ -13,7 +13,7 @@ public class BackButton : MonoBehaviour
 
     void OnClickBack()
     {
-        _rankingPanel.SetActive(false);
-        _rankingButton.SetActive(true);
+        _currentPanel.SetActive(false);
+        _nextPanel.SetActive(true);
     }
 }
