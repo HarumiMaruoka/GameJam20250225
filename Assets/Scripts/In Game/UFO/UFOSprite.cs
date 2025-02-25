@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UFOSprite : MonoBehaviour
 {
-    private void Update()
+    private void LateUpdate()
     {
         transform.rotation = Quaternion.identity;
     }

@@ -8,4 +8,12 @@ public class UFOStats : ScriptableObject
     public float Acceleration = 2f;
     public float RotationSpeed = 600f;
     public float Deceleration = 8f;
+
+    public void Reset()
+    {
+        MaxSpeed = 0f;
+        Acceleration = 0f;
+        RotationSpeed = 0f;
+        Deceleration = 0f;
+    }
 }
