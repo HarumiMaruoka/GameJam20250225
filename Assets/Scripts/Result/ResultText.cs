@@ -1,10 +1,15 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ResultText : MonoBehaviour
 {
     [SerializeField] Text _scoreText;
-
+    [SerializeField,Header("スコアの表示にかかる時間")] float _scoreChangeDuration;
+    private CancellationTokenSource _cancellationTokenSource;
+    float _targetScore;
+    float _currentScore;
     void Start()
     {
         GetScoreValue();
@@ -15,6 +20,33 @@ public class ResultText : MonoBehaviour
     /// </summary>
     void GetScoreValue()
     {
-        _scoreText.text = ScoreManager.Score.ToString();
+        OnScoreChanged(ScoreManager.Score);
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="value"></param>
+    private async void OnScoreChanged(float value)
+    {
+        _cancellationTokenSource?.Cancel();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var token = _cancellationTokenSource.Token;
+
+        _targetScore = value;
+        if (_currentScore == _targetScore) return;
+
+        var start = _currentScore;
+        var end = _targetScore;
+        for (float t = 0f; t < _scoreChangeDuration; t += Time.deltaTime)
+        {
+            if (token.IsCancellationRequested) return;
+            if (!this) return;
+            _currentScore = Mathf.Lerp(start, end, t / _scoreChangeDuration);
+            _scoreText.text = _currentScore.ToString("F0");
+            await UniTask.Yield();
+        }
+
+        _currentScore = _targetScore;
+        _scoreText.text = _currentScore.ToString("F0");
     }
 }
