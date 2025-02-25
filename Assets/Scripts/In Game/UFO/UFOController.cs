@@ -16,7 +16,7 @@ public class UFOController : MonoBehaviour
     [NonSerialized] public Rigidbody2D Rigidbody2D;
     [NonSerialized] public UFOStats UFOStats;
 
-    // Settings
+    // Stats
     public StatsType DefaultStatsType;
     [Expandable] public UFOStats UFOStatsA;
     [Expandable] public UFOStats UFOStatsB;
@@ -24,6 +24,11 @@ public class UFOController : MonoBehaviour
     [Expandable] public UFOStats UFOStatsY;
 
     [NonSerialized] public UFOStats AdditionalStats;
+
+    public float MaxSpeed => UFOStats.MaxSpeed + AdditionalStats.MaxSpeed;
+    public float Acceleration => UFOStats.Acceleration + AdditionalStats.Acceleration;
+    public float RotationSpeed => UFOStats.RotationSpeed + AdditionalStats.RotationSpeed;
+    public float Deceleration => UFOStats.Deceleration + AdditionalStats.Deceleration;
 
     // Properties
     [NonSerialized] public float CurrentSpeed;
@@ -48,22 +53,17 @@ public class UFOController : MonoBehaviour
         var moveInput = InputHandler.InGameActions.Move.ReadValue<Vector2>();
         var isMoveInputZero = moveInput == Vector2.zero;
 
-        var maxSpeed = UFOStats.MaxSpeed + AdditionalStats.MaxSpeed;
-        var acceleration = UFOStats.Acceleration + AdditionalStats.Acceleration;
-        var rotationSpeed = UFOStats.RotationSpeed + AdditionalStats.RotationSpeed;
-        var deceleration = UFOStats.Deceleration + AdditionalStats.Deceleration;
-
         if (isMoveInputZero)
         {
-            CurrentSpeed = Mathf.MoveTowards(CurrentSpeed, 0, deceleration * Time.deltaTime);
+            CurrentSpeed = Mathf.MoveTowards(CurrentSpeed, 0, Deceleration * Time.deltaTime);
         }
         else
         {
-            CurrentSpeed = Mathf.MoveTowards(CurrentSpeed, maxSpeed, acceleration * Time.deltaTime);
+            CurrentSpeed = Mathf.MoveTowards(CurrentSpeed, MaxSpeed, Acceleration * Time.deltaTime);
             TargetAngle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
         }
 
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.MoveTowardsAngle(transform.eulerAngles.z, TargetAngle, rotationSpeed * Time.deltaTime));
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.MoveTowardsAngle(transform.eulerAngles.z, TargetAngle, RotationSpeed * Time.deltaTime));
 
         Rigidbody2D.velocity = transform.right * CurrentSpeed;
     }

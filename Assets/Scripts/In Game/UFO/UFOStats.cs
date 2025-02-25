@@ -17,10 +17,24 @@ public class UFOStats : ScriptableObject
         Deceleration = 0f;
     }
 
-    public override string ToString() =>
+    public static UFOStats operator +(UFOStats a, UFOStats b)
+    {
+        var stats = CreateInstance<UFOStats>();
+
+        stats.MaxSpeed = a.MaxSpeed + b.MaxSpeed;
+        stats.Acceleration = a.Acceleration + b.Acceleration;
+        stats.RotationSpeed = a.RotationSpeed + b.RotationSpeed;
+        stats.Deceleration = a.Deceleration + b.Deceleration;
+        return stats;
+    }
+
+    public override string ToString()
+    {
+        return
         $"Stats:\n" +
         $"  MaxSpeed: {MaxSpeed}\n" +
         $"  Acceleration: {Acceleration}\n" +
         $"  RotationSpeed: {RotationSpeed}\n" +
         $"  Deceleration: {Deceleration}";
+    }
 }
