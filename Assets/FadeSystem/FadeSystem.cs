@@ -20,7 +20,7 @@ public class FadeSystem : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("読み込みは終了済み");
+/*        Debug.Log("読み込みは終了済み");
         if (UnityEngine.Input.GetKeyDown(KeyCode.Return))
         {
             FadeOut(5);
@@ -28,7 +28,7 @@ public class FadeSystem : MonoBehaviour
         if (UnityEngine.Input.GetKeyDown(KeyCode.V))
         {
             FadeIn(1);
-        }
+        }*/
 
         if (fadeImage.Range < 0)
         {
