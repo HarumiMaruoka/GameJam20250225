@@ -12,6 +12,10 @@ public class UFOController : MonoBehaviour
         Instance = this;
     }
 
+    // Components
+    [NonSerialized] public Rigidbody2D Rigidbody2D;
+    [NonSerialized] public UFOStats UFOStats;
+
     // Settings
     public StatsType DefaultStatsType;
     [Expandable] public UFOStats UFOStatsA;
@@ -20,10 +24,6 @@ public class UFOController : MonoBehaviour
     [Expandable] public UFOStats UFOStatsY;
 
     [NonSerialized] public UFOStats AdditionalStats;
-
-    // Components
-    [NonSerialized] public Rigidbody2D Rigidbody2D;
-    [NonSerialized] public UFOStats UFOStats;
 
     // Properties
     [NonSerialized] public float CurrentSpeed;

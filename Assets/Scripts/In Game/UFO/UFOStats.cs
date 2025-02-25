@@ -16,4 +16,11 @@ public class UFOStats : ScriptableObject
         RotationSpeed = 0f;
         Deceleration = 0f;
     }
+
+    public override string ToString() =>
+        $"Stats:\n" +
+        $"  MaxSpeed: {MaxSpeed}\n" +
+        $"  Acceleration: {Acceleration}\n" +
+        $"  RotationSpeed: {RotationSpeed}\n" +
+        $"  Deceleration: {Deceleration}";
 }
