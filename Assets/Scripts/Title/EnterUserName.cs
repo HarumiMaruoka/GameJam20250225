@@ -18,6 +18,5 @@ public class EnterUserName : MonoBehaviour
         {
             userName = _inputField.text;
         }
-        Debug.Log(userName);
     }
 }

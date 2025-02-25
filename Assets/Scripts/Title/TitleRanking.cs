@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TItleRanking : MonoBehaviour
+public class TitleRanking : MonoBehaviour
 {
     [SerializeField] private int rankingNum = 10;　//仮
     [SerializeField] private Text[] rankingTexts;
