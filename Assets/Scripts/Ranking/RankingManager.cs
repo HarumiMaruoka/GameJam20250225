@@ -1,82 +1,66 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Linq;
-using UnityEditor.Search;
 
 public class RankingManager : MonoBehaviour
 {
-    [SerializeField, Header("ランキングの表示数")]
+    [SerializeField, Header("ランキングの総表示数")]
     private int _rankingNum;
 
-    [SerializeField, Header("データ保存先のKeyの名前")]
-    private string _rankingDataName;
+    [SerializeField, Header("ランキングの保存先")]
+    private RankingBoard _rankingBoard = new RankingBoard();
 
-    //ランキングのList
-    [SerializeField]
-    private Dictionary<string,float> _ranking = new();
+    private string _filePath;
 
-    public Dictionary<string, float> Ranking => _ranking;
-
-    private EnterUserName _enterUserName;
+    public RankingBoard RankingBoard => _rankingBoard;
 
     private void Start()
     {
-        _enterUserName = FindAnyObjectByType<EnterUserName>();
+        //ファイルにアクセスするためのPathを作る
+        _filePath = Path.Combine(Application.persistentDataPath, "ranking.json");
     }
 
     /// <summary>
-    /// 保存してあるデータを参照してランキング作成
+    /// 保存してあるデータを参照（最初に1回呼び出せばヨシッ！）
     /// </summary>
     public void Load()
     {
-        if (PlayerPrefs.HasKey(_rankingDataName))
+        //JsonDataがあればそれを読み込む
+        if (File.Exists(_filePath))
         {
-            string[] saveDatas = PlayerPrefs.GetString(_rankingDataName).Split(',');
-            foreach (string saveData in saveDatas)
+            _rankingBoard = JsonUtility.FromJson<RankingBoard>(File.ReadAllText(_filePath));
+            Debug.Log(_filePath + "にデータがあるよ");
+
+            foreach(var data  in _rankingBoard.ranking)
             {
-                string[] nameAndScore = saveData.Split(" ");
-                _ranking.Add(nameAndScore[0], float.Parse(nameAndScore[1]));
-                Debug.Log(saveData.ToString());
+                Debug.Log(data.Name + ":" + data.Score);
             }
-            _ranking.OrderByDescending(x => x.Value);
-            if (_ranking.Count > _rankingNum)
-            {
-                for (int count = _ranking.Count; count > _rankingNum; count--)
-                {
-                    float minValue = _ranking.Values.Min();
-                    _ranking.Remove(_ranking.FirstOrDefault(x => x.Value == minValue).Key);
-                }
-            }
+        }
+        else
+        {
+            Debug.Log("何もないよ");
         }
     }
 
     /// <summary>
-    /// セーブ
+    /// UserNameとScoreを"ゲーム終了時"に保存
     /// </summary>
-    public void Save()
+    public void Save(string userName, float score)
     {
+        //ランキングにスコアを追加
+        _rankingBoard.ranking.Add(new ScoreData(userName, score));
+        Debug.Log("Scoreを追加");
 
-        if (!PlayerPrefs.HasKey(_rankingDataName))
+        //ランキングを降順ソート
+        _rankingBoard.ranking = _rankingBoard.ranking.OrderByDescending(x => x.Score).ToList();
+
+        //必要な要素数のみ残す
+        if (_rankingBoard.ranking.Count > _rankingNum)
         {
-            PlayerPrefs.SetString(_rankingDataName, _enterUserName.userName + " " + ScoreManager.Score.ToString());
-        }
-        else
-        {
-            PlayerPrefs.SetString(_rankingDataName, PlayerPrefs.GetString(_rankingDataName) + "," + _enterUserName.userName + " " + ScoreManager.Score.ToString());
+            _rankingBoard.ranking.RemoveAt(_rankingNum);
         }
 
-        if(_ranking.Count < _rankingNum)
-        {
-            _ranking.Add(_enterUserName.userName, ScoreManager.Score);
-        }
-        Debug.Log(_rankingDataName + "に" + PlayerPrefs.GetString(_rankingDataName) + "をセーブしました");
-    }
-
-    public void Delete()
-    {
-        PlayerPrefs.DeleteAll();
-        _ranking.Clear();
+        //JsonDataを保存
+        File.WriteAllText(_filePath, JsonUtility.ToJson(_rankingBoard, true));
     }
 }
