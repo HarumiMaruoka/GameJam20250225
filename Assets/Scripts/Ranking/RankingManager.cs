@@ -35,6 +35,9 @@ public class RankingManager : MonoBehaviour
     {
         //ファイルにアクセスするためのPathを作る
         _filePath = Path.Combine(Application.persistentDataPath, "ranking.json");
+
+        //古いデータのロードを行う
+        Load();
     }
 
     private void Update()
