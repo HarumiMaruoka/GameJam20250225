@@ -24,13 +24,16 @@ public class UFOController : MonoBehaviour
     [Expandable] public UFOStats UFOStatsX;
     [Expandable] public UFOStats UFOStatsY;
 
+    [Expandable] public UFOStats MinUFOStats;
+    [Expandable] public UFOStats MaxUFOStats;
+
     [NonSerialized] public UFOStats AdditionalStats;
     [NonSerialized] public UFOStats MultipleStats;
 
-    public float MaxSpeed => (UFOStats.MaxSpeed + AdditionalStats.MaxSpeed) * MultipleStats.MaxSpeed;
-    public float Acceleration => (UFOStats.Acceleration + AdditionalStats.Acceleration) * MultipleStats.Acceleration;
-    public float RotationSpeed => (UFOStats.RotationSpeed + AdditionalStats.RotationSpeed) * MultipleStats.RotationSpeed;
-    public float Deceleration => (UFOStats.Deceleration + AdditionalStats.Deceleration) * MultipleStats.Deceleration;
+    public float MaxSpeed => Mathf.Clamp((UFOStats.MaxSpeed + AdditionalStats.MaxSpeed) * MultipleStats.MaxSpeed, MinUFOStats.MaxSpeed, MaxUFOStats.MaxSpeed);
+    public float Acceleration => Mathf.Clamp((UFOStats.Acceleration + AdditionalStats.Acceleration) * MultipleStats.Acceleration, MinUFOStats.Acceleration, MaxUFOStats.Acceleration);
+    public float RotationSpeed => Mathf.Clamp((UFOStats.RotationSpeed + AdditionalStats.RotationSpeed) * MultipleStats.RotationSpeed, MinUFOStats.RotationSpeed, MaxUFOStats.RotationSpeed);
+    public float Deceleration => Mathf.Clamp((UFOStats.Deceleration + AdditionalStats.Deceleration) * MultipleStats.Deceleration, MinUFOStats.Deceleration, MaxUFOStats.Deceleration);
 
     // Properties
     [NonSerialized] public float CurrentSpeed;
