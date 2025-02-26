@@ -1,11 +1,12 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ResultText : MonoBehaviour
 {
-    [SerializeField] Text _scoreText;
+    [SerializeField] TextMeshProUGUI _scoreText;
     [SerializeField,Header("スコアの表示にかかる時間")] float _scoreChangeDuration;
     private CancellationTokenSource _cancellationTokenSource;
     float _targetScore;
@@ -13,6 +14,7 @@ public class ResultText : MonoBehaviour
     void Start()
     {
         GetScoreValue();
+        
     }
 
     /// <summary>
@@ -22,6 +24,7 @@ public class ResultText : MonoBehaviour
     {
         OnScoreChanged(ScoreManager.Score);
     }
+    
     /// <summary>
     /// 
     /// </summary>
@@ -34,7 +37,6 @@ public class ResultText : MonoBehaviour
 
         _targetScore = value;
         if (_currentScore == _targetScore) return;
-
         var start = _currentScore;
         var end = _targetScore;
         for (float t = 0f; t < _scoreChangeDuration; t += Time.deltaTime)
