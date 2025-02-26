@@ -1,6 +1,7 @@
 using Confront.Audio;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 using UnityEngine;
 
 public class ItemController : MonoBehaviour
@@ -16,6 +17,7 @@ public class ItemController : MonoBehaviour
     public AudioClip PickupSound;
     [Header("Animation")]
     public float PickupAnimationDuration = 0.5f;
+    public float SpawnAnimationDuration = 0.5f;
 
     private float _elapsedTime;
 
@@ -31,6 +33,7 @@ public class ItemController : MonoBehaviour
 
     protected virtual void OnEnable()
     {
+        SpawnAnimate();
         _elapsedTime = 0;
         _isPickedUp = false;
     }
@@ -64,8 +67,35 @@ public class ItemController : MonoBehaviour
         }
     }
 
+    private CancellationTokenSource _cancellationTokenSource;
+
+    private async void SpawnAnimate()
+    {
+        _cancellationTokenSource?.Cancel();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var token = _cancellationTokenSource.Token;
+
+        var startScale = transform.localScale;
+        transform.localScale = Vector3.zero;
+
+        for (var timer = 0.0f; timer < SpawnAnimationDuration; timer += Time.deltaTime)
+        {
+            if (!this) return;
+            if (!enabled) break;
+            if (token.IsCancellationRequested) break;
+            transform.localScale = Vector3.Lerp(Vector3.zero, startScale, timer / SpawnAnimationDuration);
+            await UniTask.Yield();
+        }
+
+        transform.localScale = startScale;
+    }
+
     private async void PickupAnimate()
     {
+        _cancellationTokenSource?.Cancel();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var token = _cancellationTokenSource.Token;
+
         var target = UFOController.Instance.transform.position;
         var startPosition = transform.position;
         var startScale = transform.localScale;
@@ -76,6 +106,7 @@ public class ItemController : MonoBehaviour
         {
             if (!this) return;
             if (!enabled) break;
+            if (token.IsCancellationRequested) break;
 
             transform.position = Vector3.Lerp(startPosition, ufo.transform.position, timer / PickupAnimationDuration);
             transform.localScale = Vector3.Lerp(startScale, Vector3.zero, timer / PickupAnimationDuration);

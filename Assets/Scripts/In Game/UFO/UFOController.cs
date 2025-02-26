@@ -71,7 +71,7 @@ public class UFOController : MonoBehaviour
             TargetAngle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
         }
 
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.MoveTowardsAngle(transform.eulerAngles.z, TargetAngle, RotationSpeed * Time.deltaTime));
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.MoveTowardsAngle(transform.eulerAngles.z, TargetAngle, RotationSpeed * 10f * Time.deltaTime));
 
         Rigidbody2D.velocity = transform.right * CurrentSpeed;
     }
