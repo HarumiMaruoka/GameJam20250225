@@ -5,9 +5,9 @@ namespace Confront.Audio
 {
     public class VolumeParameters
     {
-        private float _masterVolume = 0.5f;
-        private float _bgmVolume = 0.5f;
-        private float _seVolume = 0.3f;
+        private float _masterVolume = 0.05f;
+        private float _bgmVolume = 0.05f;
+        private float _seVolume = 0.04f;
 
         public event Action<float> OnBgmVolumeChanged;
         public event Action<float> OnSeVolumeChanged;
