@@ -20,11 +20,14 @@ public class KetteiButton : MonoBehaviour
 
     public async UniTask OnClick()
     {
-        if (_enterUserName.userName.Length < 0)
+        _audioSource.Play();
+        if (_enterUserName.userName.Length <= 0)
         {
             _enterUserName.userName = "Player";
         }
-        _audioSource.Play();
+
+        // ユーザーネームの保存
+        ScoreManager.UserName = _enterUserName.userName;
         await SceneChanger.ChangeScene(_sceneName,_cts,async () => await  _fadeSystem.FadeOut());
     }
 }

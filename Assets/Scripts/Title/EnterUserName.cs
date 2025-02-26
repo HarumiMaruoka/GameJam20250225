@@ -13,6 +13,7 @@ public class EnterUserName : MonoBehaviour
         if (_inputField.text.Length >= _nameLimit)
         {
             _inputField.text = _inputField.text[.._nameLimit];
+            
         }
         else
         {

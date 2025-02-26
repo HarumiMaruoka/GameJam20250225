@@ -11,16 +11,12 @@ public class ResultText : MonoBehaviour
     private CancellationTokenSource _cancellationTokenSource;
     float _targetScore;
     float _currentScore;
-    void Start()
-    {
-        GetScoreValue();
-        
-    }
+    
 
     /// <summary>
     /// スコアの値を受け取るメソッド
     /// </summary>
-    void GetScoreValue()
+    public void GetScoreValue()
     {
         OnScoreChanged(ScoreManager.Score);
     }

@@ -17,6 +17,7 @@ public class ScoreManager
 
     public static event Action<float> OnScoreChanged;
     private static float _score;
+
     public static float Score
     {
         get => _score;
@@ -32,6 +33,8 @@ public class ScoreManager
             OnScoreChanged?.Invoke(_score);
         }
     }
+
+    public static string UserName { get; set; }
 
     public static void AddScore(float score)
     {
