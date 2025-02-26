@@ -47,9 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: 10
+  Probability: 0.01
   Lifetime: 10
   PickupSound: {fileID: 8300000, guid: ee5c1a8466d12b84b88fe29f65953f1a, type: 3}
+  ItemType: 0
   PickupAnimationDuration: 0.5
+  SpawnAnimationDuration: 0.5
   MaxSpeed: -1
   Acceleration: -2
   RotationSpeed: -30

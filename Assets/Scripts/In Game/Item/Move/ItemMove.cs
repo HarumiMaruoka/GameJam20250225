@@ -31,10 +31,13 @@ public class ItemMove : MonoBehaviour
         _stopDuration = UnityEngine.Random.Range(MinStopDuration, MaxStopDuration);
         _noiseOffsetX = UnityEngine.Random.Range(0f, 100f);
         _noiseOffsetY = UnityEngine.Random.Range(0f, 100f);
+        _isMoving = UnityEngine.Random.value > 0.5f;
     }
 
     private void Update()
     {
+        if (PauseManager.IsPaused) return;
+
         _elapsedTime += Time.deltaTime;
         if (_isMoving)
         {

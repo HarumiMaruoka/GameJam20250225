@@ -52,6 +52,8 @@ public class UFOController : MonoBehaviour
 
     public void Update()
     {
+        if (PauseManager.IsPaused) return;
+
         HandleMovement();
         SwitchUFOStats();
     }

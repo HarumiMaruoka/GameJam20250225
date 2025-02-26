@@ -8,11 +8,6 @@ public static class ItemCounter
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
-        _prefabs = Resources.LoadAll<ItemController>("Items");
-        for (int i = 0; i < _prefabs.Length; i++)
-        {
-            _itemCounts.Add(_prefabs[i].ItemType, 0);
-        }
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -20,10 +15,11 @@ public static class ItemCounter
     {
         if (arg0.name == "In Game")
         {
-            for (int i = 0; i < _prefabs.Length; i++)
-            {
-                _itemCounts[_prefabs[i].ItemType] = 0;
-            }
+            _itemCounts[CountItemType.None] = 0;
+            _itemCounts[CountItemType.Cow] = 0;
+            _itemCounts[CountItemType.Human] = 0;
+            _itemCounts[CountItemType.Pig] = 0;
+            _itemCounts[CountItemType.Chicken] = 0;
         }
     }
 
@@ -35,7 +31,6 @@ public static class ItemCounter
         }
     }
 
-    private static ItemController[] _prefabs;
     private static Dictionary<CountItemType, int> _itemCounts = new Dictionary<CountItemType, int>();
     public static IReadOnlyDictionary<CountItemType, int> ItemCounts => _itemCounts;
 }

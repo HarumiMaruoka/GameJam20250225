@@ -54,7 +54,7 @@ AudioSource:
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: -1
   rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
@@ -65,24 +65,33 @@ AudioSource:
     - serializedVersion: 3
       time: 0.002
       value: 1
-      inSlope: -0.31207126
-      outSlope: -0.31207126
+      inSlope: 0.015956745
+      outSlope: 0.015956745
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 1
+      outWeight: 0.18518268
     - serializedVersion: 3
-      time: 0.07612614
-      value: 0.9821274
-      inSlope: -0.58935887
-      outSlope: -0.58935887
+      time: 0.4566694
+      value: 0.9757311
+      inSlope: -0.25846797
+      outSlope: -0.25846797
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.26252878
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.47289282
+      value: 0.9589493
+      inSlope: -1.2329435
+      outSlope: -1.2329435
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 1
     - serializedVersion: 3
-      time: 0.089740396
-      value: 0.9268546
+      time: 0.48574412
+      value: 0.89029455
       inSlope: -10.79431
       outSlope: -10.79431
       tangentMode: 0
@@ -90,17 +99,17 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.15185577
-      value: 0.48564148
-      inSlope: -3.5298383
-      outSlope: -3.5298383
+      time: 0.522034
+      value: 0.46583557
+      inSlope: -5.2463837
+      outSlope: -5.2463837
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.28214097
+      inWeight: 0.34305766
       outWeight: 0.12099564
     - serializedVersion: 3
-      time: 0.27348658
-      value: 0.1845398
+      time: 0.6208682
+      value: 0.16360474
       inSlope: -1.4671091
       outSlope: -1.4671091
       tangentMode: 0
@@ -108,8 +117,8 @@ AudioSource:
       inWeight: 0.4842513
       outWeight: 0.21704747
     - serializedVersion: 3
-      time: 0.512
-      value: 0.00390625
+      time: 0.81227773
+      value: 0
       inSlope: -0.0076324563
       outSlope: -0.0076324563
       tangentMode: 0

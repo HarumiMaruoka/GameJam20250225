@@ -26,6 +26,8 @@ public class ItemSpawner : MonoBehaviour
 
     [Header("Items")]
     [SerializeField]
+    private int _initialItems = 10;
+    [SerializeField]
     private int _maxActiveItems = 100;
 
     private HashSet<ItemController> _activeItems = new HashSet<ItemController>();
@@ -43,6 +45,11 @@ public class ItemSpawner : MonoBehaviour
         for (int i = 0; i < _itemSpawnData.Length; i++)
         {
             _pool.Add(_itemSpawnData[i].GetInstanceID(), new Stack<ItemController>());
+        }
+
+        for (int i = 0; i < _initialItems; i++)
+        {
+            SpawnItem();
         }
     }
 

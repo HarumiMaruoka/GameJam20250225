@@ -70,7 +70,6 @@ public class ItemController : MonoBehaviour
         if (other.gameObject == UFOController.Instance.Searchlight.gameObject)
         {
             AudioManager.PlaySE(PickupSound);
-            OnPickup();
             PickupAnimate();
         }
     }
@@ -125,6 +124,7 @@ public class ItemController : MonoBehaviour
         ScorePopupSystem.Instance.ShowScorePopup(Score, ufo.transform.position);
         ScoreManager.AddScore(Score);
         ItemCounter.AddItem(Original);
+        OnPickup();
         Pool.ReturnToPool(this);
     }
 }

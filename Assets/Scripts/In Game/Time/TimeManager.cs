@@ -31,6 +31,7 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
+        if (PauseManager.IsPaused) return;
         UpdateTimeLimit(UnityEngine.Time.deltaTime);
     }
 

@@ -54,7 +54,7 @@ MonoBehaviour:
   MaxStopDuration: 2
   MinMoveDuration: 5
   MaxMoveDuration: 10
-  NoiseScale: 0.1
+  NoiseScale: 0.01
 --- !u!114 &1570910488802073201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,9 +68,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: 500
+  Probability: 0.1
   Lifetime: 10
   PickupSound: {fileID: 8300000, guid: ee5c1a8466d12b84b88fe29f65953f1a, type: 3}
+  ItemType: 3
   PickupAnimationDuration: 0.5
+  SpawnAnimationDuration: 0.5
 --- !u!212 &4775143849843776280
 SpriteRenderer:
   m_ObjectHideFlags: 0
