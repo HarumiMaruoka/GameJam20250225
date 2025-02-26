@@ -11,7 +11,7 @@ public static class ItemCounter
         _prefabs = Resources.LoadAll<ItemController>("Items");
         for (int i = 0; i < _prefabs.Length; i++)
         {
-            _itemCounts.Add(_prefabs[i], 0);
+            _itemCounts.Add(_prefabs[i].ItemType, 0);
         }
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -22,20 +22,20 @@ public static class ItemCounter
         {
             for (int i = 0; i < _prefabs.Length; i++)
             {
-                _itemCounts[_prefabs[i]] = 0;
+                _itemCounts[_prefabs[i].ItemType] = 0;
             }
         }
     }
 
     public static void AddItem(ItemController item)
     {
-        if (_itemCounts.ContainsKey(item))
+        if (_itemCounts.ContainsKey(item.ItemType))
         {
-            _itemCounts[item]++;
+            _itemCounts[item.ItemType]++;
         }
     }
 
     private static ItemController[] _prefabs;
-    private static Dictionary<ItemController, int> _itemCounts = new Dictionary<ItemController, int>();
-    public static IReadOnlyDictionary<ItemController, int> ItemCounts => _itemCounts;
+    private static Dictionary<CountItemType, int> _itemCounts = new Dictionary<CountItemType, int>();
+    public static IReadOnlyDictionary<CountItemType, int> ItemCounts => _itemCounts;
 }

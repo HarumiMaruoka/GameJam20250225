@@ -71,6 +71,15 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""125aa06d-d00c-456f-bfe3-46dcf9ae8dc7"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -227,6 +236,50 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""action"": ""Y"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""a000bedb-86c7-4244-9a70-8507c5f09ead"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""15f7c904-abfc-4290-97f4-a33d93bf5122"",
+                    ""path"": ""<Keyboard>/backslash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""0ebf216f-1fec-4b99-be98-c8d11fcd33c9"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a8d610b-1e3f-43f4-adc3-36f141845a50"",
+                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -240,6 +293,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_InGame_B = m_InGame.FindAction("B", throwIfNotFound: true);
         m_InGame_X = m_InGame.FindAction("X", throwIfNotFound: true);
         m_InGame_Y = m_InGame.FindAction("Y", throwIfNotFound: true);
+        m_InGame_Zoom = m_InGame.FindAction("Zoom", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -306,6 +360,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_B;
     private readonly InputAction m_InGame_X;
     private readonly InputAction m_InGame_Y;
+    private readonly InputAction m_InGame_Zoom;
     public struct InGameActions
     {
         private @Input m_Wrapper;
@@ -315,6 +370,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @B => m_Wrapper.m_InGame_B;
         public InputAction @X => m_Wrapper.m_InGame_X;
         public InputAction @Y => m_Wrapper.m_InGame_Y;
+        public InputAction @Zoom => m_Wrapper.m_InGame_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -339,6 +395,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Y.started += instance.OnY;
             @Y.performed += instance.OnY;
             @Y.canceled += instance.OnY;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -358,6 +417,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Y.started -= instance.OnY;
             @Y.performed -= instance.OnY;
             @Y.canceled -= instance.OnY;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -382,5 +444,6 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnB(InputAction.CallbackContext context);
         void OnX(InputAction.CallbackContext context);
         void OnY(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
 }

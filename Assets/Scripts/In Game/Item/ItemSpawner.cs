@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        _itemSpawnData = Resources.LoadAll<ItemController>("Items");
+    }
+
+    private static ItemController[] _itemSpawnData;
+
     [Header("Range")]
     [SerializeField]
     private float _minSpawnRange = 5f;
@@ -19,8 +27,6 @@ public class ItemSpawner : MonoBehaviour
     [Header("Items")]
     [SerializeField]
     private int _maxActiveItems = 100;
-    [SerializeField]
-    private ItemSpawnData[] _itemSpawnData;
 
     private HashSet<ItemController> _activeItems = new HashSet<ItemController>();
     private Dictionary<int, Stack<ItemController>> _pool = new Dictionary<int, Stack<ItemController>>();
@@ -36,7 +42,7 @@ public class ItemSpawner : MonoBehaviour
 
         for (int i = 0; i < _itemSpawnData.Length; i++)
         {
-            _pool.Add(_itemSpawnData[i].Item.GetInstanceID(), new Stack<ItemController>());
+            _pool.Add(_itemSpawnData[i].GetInstanceID(), new Stack<ItemController>());
         }
     }
 
@@ -107,20 +113,9 @@ public class ItemSpawner : MonoBehaviour
             currentProbability += itemSpawnData.Probability;
             if (randomValue <= currentProbability)
             {
-                return itemSpawnData.Item;
+                return itemSpawnData;
             }
         }
-        return _itemSpawnData[0].Item;
+        return _itemSpawnData[0];
     }
 }
-
-[Serializable]
-public class ItemSpawnData
-{
-    public ItemController Item;
-    public float Probability;
-}
-
-#if UNITY_EDITOR
-
-#endif
