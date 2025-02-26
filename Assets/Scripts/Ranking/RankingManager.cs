@@ -16,6 +16,8 @@ public class RankingManager : MonoBehaviour
 
     private string _filePath;
 
+    public string UserName;
+
     public RankingBoard RankingBoard => _rankingBoard;
 
     private void Awake()
@@ -99,5 +101,10 @@ public class RankingManager : MonoBehaviour
         File.Delete(_filePath);
         _rankingBoard.ranking.Clear();
         _rankingBoard = new();
+    }
+
+    public void UserNameSet(string value)
+    {
+        UserName = value;
     }
 }

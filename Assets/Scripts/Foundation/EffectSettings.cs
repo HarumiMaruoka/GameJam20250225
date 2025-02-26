@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EffectSettings : MonoBehaviour
 {
+    void Start()
+    {
+        CreateEffect("Eff_Confetti",gameObject,5f);
+    }
+
     public void CreateEffect(string effectName,GameObject parent,float destroyTime)
     {
         var effectPrefab = Resources.Load<ParticleSystem>($"{effectName}");
