@@ -16,5 +16,6 @@ public class TitleButton : MonoBehaviour
     {
         _currentPanel.SetActive(false);
         _nextPanel.SetActive(true);
+        _audioSource.Play();
     }
 }

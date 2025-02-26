@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -10,10 +11,14 @@ public class TitleRanking : MonoBehaviour
     private void Start()
     {
         _rankingManager = RankingManager.Instance;
-        RankingInstance();
     }
 
-    void RankingInstance()
+    private void OnEnable()
+    {
+        RankingUpdate();
+    }
+
+    void RankingUpdate()
     {
         for (int i = 1; i <= rankingNum; i++)
         {

@@ -9,6 +9,7 @@ public class KetteiButton : MonoBehaviour
     [SerializeField] private string _sceneName;
     [SerializeField] private EnterUserName _enterUserName;
     [SerializeField] private FadeSystem _fadeSystem;
+    [SerializeField] private AudioSource _audioSource;
     private CancellationTokenSource _cts;
 
     void Start()
@@ -19,14 +20,11 @@ public class KetteiButton : MonoBehaviour
 
     public async UniTask OnClick()
     {
-        if (_enterUserName.userName.Length > 0)
-        {
-            await SceneChanger.ChangeScene(_sceneName,_cts,async () => await  _fadeSystem.FadeOut());
-        }
-        else
+        if (_enterUserName.userName.Length < 0)
         {
             _enterUserName.userName = "Player";
-            await SceneChanger.ChangeScene(_sceneName,_cts,async () => await  _fadeSystem.FadeOut());
         }
+        _audioSource.Play();
+        await SceneChanger.ChangeScene(_sceneName,_cts,async () => await  _fadeSystem.FadeOut());
     }
 }
