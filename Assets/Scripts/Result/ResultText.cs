@@ -2,7 +2,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ResultText : MonoBehaviour
 {
@@ -16,16 +15,16 @@ public class ResultText : MonoBehaviour
     /// <summary>
     /// スコアの値を受け取るメソッド
     /// </summary>
-    public void GetScoreValue()
+    public async UniTask GetScoreValue()
     {
-        OnScoreChanged(ScoreManager.Score);
+        await OnScoreChanged(ScoreManager.Score);
     }
     
     /// <summary>
     /// 
     /// </summary>
     /// <param name="value"></param>
-    private async void OnScoreChanged(float value)
+    public async UniTask OnScoreChanged(float value)
     {
         _cancellationTokenSource?.Cancel();
         _cancellationTokenSource = new CancellationTokenSource();

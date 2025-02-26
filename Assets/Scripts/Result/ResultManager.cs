@@ -1,12 +1,14 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class ResultManager : MonoBehaviour
 {
    [SerializeField] private ResultText _resultText;
 
-   private void Start()
+   private async void Start()
    {
       SaveData();
+      await SetResultScore();
    }
 
    private void SaveData()
@@ -14,13 +16,11 @@ public class ResultManager : MonoBehaviour
       // スコアの取り出しと保存
       var score = ScoreManager.Score;
       var userName  = ScoreManager.UserName;
-      Debug.Log($"Score: {score}, UserName: {userName}");
-      
       RankingManager.Instance.Save(userName, score);
    }
    
-   private void SetResultScore()
+   private async UniTask SetResultScore()
    {
-      _resultText.GetScoreValue();
+      await _resultText.GetScoreValue();
    }
 }
