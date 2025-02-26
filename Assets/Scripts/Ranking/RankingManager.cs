@@ -7,11 +7,13 @@ public class RankingManager : MonoBehaviour
     private static RankingManager _instance;
 
     public static RankingManager Instance => _instance;
-    private int _rankingNum = 10;
+
+    [SerializeField,Header("ランキングの最大要素数")]
+    private int _rankingMaxNum = 10;
+
     private RankingBoard _rankingBoard = new RankingBoard();
 
     private string _filePath;
-
     public RankingBoard RankingBoard => _rankingBoard;
 
     private void Awake()
@@ -58,12 +60,13 @@ public class RankingManager : MonoBehaviour
         }
 
         float tmp = _rankingBoard.ranking.Count();
+        const int firstNum = 0;
 
-        if (tmp < 11)
+        if (tmp <= _rankingMaxNum)
         {
-            for (int i = 0; i < 11 - tmp; i++)
+            for (int rankingNum = 0; rankingNum <= _rankingMaxNum - tmp; rankingNum++)
             {
-                _rankingBoard.ranking.Add(new ScoreData("", 0));
+                _rankingBoard.ranking.Add(new ScoreData("", firstNum));
             }
         }
     }
@@ -80,9 +83,9 @@ public class RankingManager : MonoBehaviour
         _rankingBoard.ranking = _rankingBoard.ranking.OrderByDescending(x => x.Score).ToList();
 
         //必要な要素数のみ残す
-        if (_rankingBoard.ranking.Count > _rankingNum)
+        if (_rankingBoard.ranking.Count > _rankingMaxNum)
         {
-            _rankingBoard.ranking.RemoveAt(_rankingNum);
+            _rankingBoard.ranking.RemoveAt(_rankingMaxNum);
         }
 
         //JsonDataを保存
