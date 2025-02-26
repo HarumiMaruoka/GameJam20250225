@@ -900,7 +900,7 @@ MonoBehaviour:
   _minSpawnRange: 15
   _maxSpawnRange: 100
   _minSpawnTime: 0
-  _maxSpawnTime: 0.333
+  _maxSpawnTime: 0.2
   _initialItems: 10
   _maxActiveItems: 100
 --- !u!1 &636750389

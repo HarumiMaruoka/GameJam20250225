@@ -67,13 +67,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29291f8dd8d50fb488486611932f9d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 10
+  Score: 5000
   Probability: 0.1
   Lifetime: 10
   PickupSound: {fileID: 8300000, guid: ee5c1a8466d12b84b88fe29f65953f1a, type: 3}
   ItemType: 1
-  PickupAnimationDuration: 0.5
   SpawnAnimationDuration: 0.5
+  PickupAnimationDuration: 0.5
   boostDuration: 5
   MaxSpeedBoost: 0.5
   AccelerationBoost: 0.5

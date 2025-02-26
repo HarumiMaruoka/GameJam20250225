@@ -47,11 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f602245fa3e504389a551417182fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 10
+  Score: 0
+  Probability: 1
   Lifetime: 10
   PickupSound: {fileID: 8300000, guid: ee5c1a8466d12b84b88fe29f65953f1a, type: 3}
+  ItemType: 0
+  SpawnAnimationDuration: 0.5
   PickupAnimationDuration: 0.5
-  TimeToAdd: -5
+  TimeToAdd: -3
 --- !u!212 &1783697601917853141
 SpriteRenderer:
   m_ObjectHideFlags: 0

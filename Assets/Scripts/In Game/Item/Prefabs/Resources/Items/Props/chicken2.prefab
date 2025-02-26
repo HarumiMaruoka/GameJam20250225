@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093bfdef592e9ad44b2cfb5923848258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 10
+  Score: 250
   Probability: 3
   Lifetime: 10
   PickupSound: {fileID: 8300000, guid: ee5c1a8466d12b84b88fe29f65953f1a, type: 3}
