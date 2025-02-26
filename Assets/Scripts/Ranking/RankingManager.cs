@@ -20,8 +20,17 @@ public class RankingManager : MonoBehaviour
         _filePath = Path.Combine(Application.persistentDataPath, "ranking.json");
     }
 
+    private void Update()
+    {
+        //"P"Keyが押されたらData消去
+        if (UnityEngine.Input.GetKeyDown(KeyCode.P))
+        {
+            DataDelete();
+        }
+    }
+
     /// <summary>
-    /// 保存してあるデータを参照（最初に1回呼び出せばヨシッ！）
+    /// 保存してあるデータを参照（一番最初に1回呼び出せばヨシッ！）
     /// </summary>
     public void Load()
     {
@@ -62,5 +71,15 @@ public class RankingManager : MonoBehaviour
 
         //JsonDataを保存
         File.WriteAllText(_filePath, JsonUtility.ToJson(_rankingBoard, true));
+    }
+
+    /// <summary>
+    /// Debug用のデータ消去関数
+    /// </summary>
+    public void DataDelete()
+    {
+        File.Delete(_filePath);
+        _rankingBoard.ranking.Clear();
+        _rankingBoard = new();
     }
 }
