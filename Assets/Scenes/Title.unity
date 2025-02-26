@@ -668,6 +668,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5585017316147412792, guid: e1c8bc610fff9b24dbea10ec913580b8, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5585017316147412792, guid: e1c8bc610fff9b24dbea10ec913580b8, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5585017316147412792, guid: e1c8bc610fff9b24dbea10ec913580b8, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5776731293151145926, guid: e1c8bc610fff9b24dbea10ec913580b8, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -750,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6147799685768958229, guid: e1c8bc610fff9b24dbea10ec913580b8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6453068941055728173, guid: e1c8bc610fff9b24dbea10ec913580b8, type: 3}
       propertyPath: m_AnchorMax.x
