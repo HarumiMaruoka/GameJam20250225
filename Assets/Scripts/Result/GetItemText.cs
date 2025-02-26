@@ -9,7 +9,8 @@ public class GetItemText : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            _texts[0].text = ItemCounter.ItemCounts[_prefabs[i]].ToString();
+            Debug.Log(ItemCounter.ItemCounts[_prefabs[i]]);
+            _texts[i].text = ItemCounter.ItemCounts[_prefabs[i]].ToString();
         }
     }
 }
