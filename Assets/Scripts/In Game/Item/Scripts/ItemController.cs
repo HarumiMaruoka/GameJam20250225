@@ -17,6 +17,7 @@ public class ItemController : MonoBehaviour
     public float Lifetime = 10f;
     public AudioClip PickupSound;
     public CountItemType ItemType;
+
     [Header("Animation")]
     public float SpawnAnimationDuration = 0.5f;
     public float PickupAnimationDuration = 0.5f;
