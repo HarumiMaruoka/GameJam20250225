@@ -59,11 +59,6 @@ public class RankingManager : MonoBehaviour
         if (File.Exists(_filePath))
         {
             _rankingBoard = JsonUtility.FromJson<RankingBoard>(File.ReadAllText(_filePath));
-
-            foreach(var data  in _rankingBoard.ranking)
-            {
-                Debug.Log(data.Name + ":" + data.Score);
-            }
         }
     }
 
