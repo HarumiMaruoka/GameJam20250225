@@ -17,7 +17,6 @@ public class EnterUserName : MonoBehaviour
         else
         {
             userName = _inputField.text;
-            RankingManager.Instance.UserNameSet(userName);
         }
     }
 }

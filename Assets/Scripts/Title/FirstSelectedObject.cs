@@ -7,6 +7,6 @@ public class FirstSelectedObject : MonoBehaviour
     private void OnEnable()
     {
         EventSystem.current.SetSelectedGameObject(gameObject);
-        gameObject.GetComponent<Button>().OnSelect(null);
+        gameObject.GetComponent<Selectable>().OnSelect(null);
     }
 }
