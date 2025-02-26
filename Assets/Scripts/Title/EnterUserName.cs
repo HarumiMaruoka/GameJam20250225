@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnterUserName : MonoBehaviour
 {
@@ -9,11 +8,11 @@ public class EnterUserName : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _inputText;
     public string userName = "";
 
-    public void CheckPlaceHolder()
+    public void CheckUserName()
     {
         if (_inputField.text.Length >= _nameLimit)
         {
-            _inputField.text = _inputField.text[..3];
+            _inputField.text = _inputField.text[.._nameLimit];
         }
         else
         {
