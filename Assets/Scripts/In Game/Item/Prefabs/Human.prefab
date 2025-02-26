@@ -47,7 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: 10
+  Lifetime: 10
   PickupSound: {fileID: 8300000, guid: ee5c1a8466d12b84b88fe29f65953f1a, type: 3}
+  PickupAnimationDuration: 0.5
   boostDuration: 5
   MaxSpeedBoost: 0
   AccelerationBoost: 0

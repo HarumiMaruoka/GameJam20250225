@@ -7,18 +7,14 @@ public class AreaExpansionItem : ItemController
     public float Duration;
     public float ExpansionAmount;
 
-    public async override void OnPickup()
+    public static float MinExpansionAmount = 0.4f;
+    public static float MaxExpansionAmount = 1.5f;
+
+    public override void OnPickup()
     {
         var player = UFOController.Instance;
-        player.CircleCollider2D.radius += ExpansionAmount;
-
-        for (float t = 0; t < Duration; t += Time.deltaTime)
-        {
-            if (!player) return;
-            await UniTask.Yield();
-        }
-
-        if (!player) return;
-        player.CircleCollider2D.radius -= ExpansionAmount;
+        var searchlight = player.Searchlight;
+        var scale = searchlight.localScale;
+        searchlight.transform.localScale = new Vector3(scale.x + ExpansionAmount, scale.y, 1);
     }
 }

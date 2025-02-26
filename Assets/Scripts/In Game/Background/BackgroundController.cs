@@ -25,7 +25,7 @@ public class BackgroundController : MonoBehaviour
                     continue;
                 }
 
-                _backgrounds[i + 1, j + 1] = Instantiate(_centerBG, new Vector3(i * _width, j * _height, 0), Quaternion.identity);
+                _backgrounds[i + 1, j + 1] = Instantiate(_centerBG, new Vector3(i * _width, j * _height, 0), Quaternion.identity, transform);
             }
         }
     }
@@ -40,14 +40,7 @@ public class BackgroundController : MonoBehaviour
         {
             for (int j = -1; j <= 1; j++)
             {
-                try
-                {
-                    _backgrounds[i + 1, j + 1].transform.position = new Vector3((x + i) * _width, (y + j) * _height, 0);
-                }
-                catch
-                {
-                    Debug.Log("");
-                }
+                _backgrounds[i + 1, j + 1].transform.position = new Vector3((x + i) * _width, (y + j) * _height, 0);
             }
         }
     }

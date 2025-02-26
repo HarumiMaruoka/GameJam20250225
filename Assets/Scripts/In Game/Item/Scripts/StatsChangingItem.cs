@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class StatsChangingItem : ItemController
 {
+    [Header("Stats")]
     public float MaxSpeed = 0;
     public float Acceleration = 0;
     public float RotationSpeed = 0;

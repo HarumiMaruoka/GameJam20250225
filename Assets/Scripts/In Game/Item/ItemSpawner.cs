@@ -148,3 +148,7 @@ public enum Edge
 {
     Top, Bottom, Left, Right
 }
+
+#if UNITY_EDITOR
+
+#endif

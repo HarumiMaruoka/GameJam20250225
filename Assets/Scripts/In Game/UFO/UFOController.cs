@@ -15,7 +15,7 @@ public class UFOController : MonoBehaviour
     // Components
     [NonSerialized] public Rigidbody2D Rigidbody2D;
     [NonSerialized] public UFOStats UFOStats;
-    [NonSerialized] public CircleCollider2D CircleCollider2D;
+    public Transform Searchlight;
 
     // Stats
     public StatsType DefaultStatsType;
@@ -43,7 +43,6 @@ public class UFOController : MonoBehaviour
     {
         UFOStats = GetStats(DefaultStatsType);
         Rigidbody2D = GetComponent<Rigidbody2D>();
-        CircleCollider2D = GetComponent<CircleCollider2D>();
 
         AdditionalStats = ScriptableObject.CreateInstance<UFOStats>();
         MultipleStats = ScriptableObject.CreateInstance<UFOStats>();
