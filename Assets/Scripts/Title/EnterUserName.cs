@@ -1,11 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnterUserName : MonoBehaviour
 {
     [SerializeField, Header("文字数制限")] private int _nameLimit;
-    [SerializeField] private InputField _inputField;
-    [SerializeField] private Text _inputText;
+    [SerializeField] private TMP_InputField _inputField;
+    [SerializeField] private TextMeshProUGUI _inputText;
     public string userName = "";
 
     public void CheckPlaceHolder()
