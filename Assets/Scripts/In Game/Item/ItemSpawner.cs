@@ -68,7 +68,10 @@ public class ItemSpawner : MonoBehaviour
 
     private void SpawnItem()
     {
-        var spawnPosition = UFOController.Instance.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * UnityEngine.Random.Range(_minSpawnRange, _maxSpawnRange);
+        var random = UnityEngine.Random.Range(_minSpawnRange, _maxSpawnRange);
+        var spawnPosition = UFOController.Instance.transform.position +
+            (Vector3)UnityEngine.Random.insideUnitCircle.normalized * random;
+
         var prefab = GetRandomItem();
 
         if (TryGetItemFromPool(prefab, out ItemController instance))
