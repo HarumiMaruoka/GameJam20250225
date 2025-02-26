@@ -1,34 +1,37 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows;
+using Cysharp.Threading;
 
 public class FadeSystem : MonoBehaviour
 {
-    [SerializeField, Tooltip("ここにフェードインorフェードアウトするまでの時間を設定する")] float toFadeTime = 1;
+    //[SerializeField, Tooltip("ここにフェードインorフェードアウトするまでの時間を設定する")] float toFadeTime = 1;
     [SerializeField, Tooltip("チェックが入っていればフェードイン、入ってなければフェードアウト")] bool fadeIn = true;
-    GameObject fadeCanvas;
+    [SerializeField, Tooltip("DelayTime")]private int _fadeDelayTime = 10;
     FadeImage fadeImage;
+
+    private const int _fadeLoop = 100;
 
     // Start is called before the first frame update
     void Start()
     {
-        fadeCanvas = GameObject.FindWithTag("FadeCanvas");
-        fadeImage = fadeCanvas.GetComponent<FadeImage>();
+        fadeImage = GetComponent<FadeImage>();
     }
 
     private void Update()
     {
-/*        Debug.Log("読み込みは終了済み");
+        Debug.Log("読み込みは終了済み");
         if (UnityEngine.Input.GetKeyDown(KeyCode.Return))
         {
-            FadeOut(5);
+            FadeOut();
         }
         if (UnityEngine.Input.GetKeyDown(KeyCode.V))
         {
-            FadeIn(1);
-        }*/
+            FadeIn();
+        }
 
         if (fadeImage.Range < 0)
         {
@@ -40,34 +43,32 @@ public class FadeSystem : MonoBehaviour
         }
     }
 
-    public void FadeIn(float time)
+    public async UniTask FadeIn()
     {
-        toFadeTime = time;
         fadeIn = true;
-        StartCoroutine("FadeIn_Out");
+        await FadeIn_Out();
     }
 
-    public void FadeOut(float time)
+    public async UniTask FadeOut()
     {
-        toFadeTime = time;
         fadeIn = false;
-        StartCoroutine("FadeIn_Out");
+        await FadeIn_Out();
     }
 
-    IEnumerator FadeIn_Out()
+    public async UniTask FadeIn_Out()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < _fadeLoop; i++)
         {
             if (fadeIn)
             {
                 fadeImage.Range -= 0.01f;
+                await UniTask.Delay(_fadeDelayTime);
             }
             else
             {
                 fadeImage.Range += 0.01f;
+                await UniTask.Delay(_fadeDelayTime);
             }
-
-            yield return new WaitForSeconds(toFadeTime / 100);
         }
     }
 }
