@@ -1,23 +1,25 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TitleRanking : MonoBehaviour
 {
     [SerializeField] private int rankingNum = 10;　//仮
-    [SerializeField] private Text[] rankingTexts;
+    [SerializeField] private TextMeshProUGUI[] rankingTexts;
+    private RankingManager _rankingManager;
 
     private void Start()
     {
+        _rankingManager = RankingManager.Instance;
         RankingInstance();
     }
 
     void RankingInstance()
     {
-        string userName = "aaa";
-        float score = 0;
-        rankingTexts[0].text = $"{1}位 : {userName} , score{score}pt";
-        for (int i = 2; i <= rankingNum; i++)
+        for (int i = 1; i <= rankingNum; i++)
         {
+            var val = _rankingManager.RankingBoard.ranking[i - 1];
+            string userName = val._name;
+            float score = val._score;
             rankingTexts[i - 1].text = $"{i}位 : {userName} , score{score}pt";
         }
     }

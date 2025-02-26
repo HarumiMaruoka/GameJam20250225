@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectButton : MonoBehaviour
+public class TitleButton : MonoBehaviour
 {
     [SerializeField] private GameObject _currentPanel;
     [SerializeField] private Button _button;
