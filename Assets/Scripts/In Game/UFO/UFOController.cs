@@ -7,14 +7,19 @@ public class UFOController : MonoBehaviour
 {
     public static UFOController Instance { get; private set; }
 
-    private void Awake()
+    private UFOStats _ufoStats;
+    public UFOStats UFOStats
     {
-        Instance = this;
+        get => _ufoStats;
+        set
+        {
+            _ufoStats = value;
+            OnBaseStatsChanged?.Invoke(value);
+        }
     }
 
     // Components
     [NonSerialized] public Rigidbody2D Rigidbody2D;
-    [NonSerialized] public UFOStats UFOStats;
     public Transform Searchlight;
 
     // Stats
@@ -35,12 +40,16 @@ public class UFOController : MonoBehaviour
     public float RotationSpeed => Mathf.Clamp((UFOStats.RotationSpeed + AdditionalStats.RotationSpeed) * MultipleStats.RotationSpeed, MinUFOStats.RotationSpeed, MaxUFOStats.RotationSpeed);
     public float Deceleration => Mathf.Clamp((UFOStats.Deceleration + AdditionalStats.Deceleration) * MultipleStats.Deceleration, MinUFOStats.Deceleration, MaxUFOStats.Deceleration);
 
+    public event Action<UFOStats> OnBaseStatsChanged;
+
     // Properties
     [NonSerialized] public float CurrentSpeed;
     [NonSerialized] public float TargetAngle;
 
-    private void Start()
+    private void Awake()
     {
+        Instance = this;
+
         UFOStats = GetStats(DefaultStatsType);
         Rigidbody2D = GetComponent<Rigidbody2D>();
 
