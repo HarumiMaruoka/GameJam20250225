@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class EffectSettings : MonoBehaviour
 {
+    [SerializeField] private float _destroyTime;
     void Start()
     {
-        CreateEffect("Eff_Confetti",gameObject,5f);
+        CreateEffect("Eff_Confetti",gameObject);
     }
 
-    public void CreateEffect(string effectName,GameObject parent,float destroyTime)
+    public void CreateEffect(string effectName,GameObject parent)
     {
         var effectPrefab = Resources.Load<ParticleSystem>($"{effectName}");
         var effect = Instantiate(effectPrefab,parent.transform);
-        Destroy(effect.gameObject,destroyTime);
+        Destroy(effect.gameObject,_destroyTime);
     }
 
     private async UniTask CreateEffectAsync(string effectName, CancellationTokenSource cts, GameObject parent)

@@ -793,8 +793,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3131515968945677102, guid: c273a5d90b1941e469fbb7363ea7c91f, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131515968945677102, guid: c273a5d90b1941e469fbb7363ea7c91f, type: 3}
       propertyPath: m_Volume
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3151013181864151792, guid: c273a5d90b1941e469fbb7363ea7c91f, type: 3}
       propertyPath: m_AnchorMax.y
