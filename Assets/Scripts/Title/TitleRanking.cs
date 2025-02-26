@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -6,16 +5,10 @@ public class TitleRanking : MonoBehaviour
 {
     [SerializeField] private int rankingNum = 10;　//仮
     [SerializeField] private TextMeshProUGUI[] rankingTexts;
-    //private RankingManager _rankingManager;
 
     private void Start()
     {
-        //_rankingManager = RankingManager.Instance;
-    }
-
-    private void OnEnable()
-    {
-        RankingUpdate();
+        Invoke(nameof(RankingUpdate), 0.1f); // 0.1秒後に実行
     }
 
     void RankingUpdate()
