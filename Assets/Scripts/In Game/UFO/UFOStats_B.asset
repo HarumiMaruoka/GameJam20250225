@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7b3b1fe5f03224082039885ffc4c8c, type: 3}
   m_Name: UFOStats_B
   m_EditorClassIdentifier: 
-  MaxSpeed: 4
-  Acceleration: 12
-  RotationSpeed: 60
-  Deceleration: 1
+  MaxSpeed: 10
+  Acceleration: 15
+  RotationSpeed: 20
+  Deceleration: 20

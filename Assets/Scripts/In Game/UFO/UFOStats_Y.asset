@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: UFOStats_Y
   m_EditorClassIdentifier: 
   MaxSpeed: 10
-  Acceleration: 999
-  RotationSpeed: 999
-  Deceleration: 999
+  Acceleration: 10
+  RotationSpeed: 20
+  Deceleration: 30
