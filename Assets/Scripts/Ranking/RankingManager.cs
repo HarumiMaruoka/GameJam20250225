@@ -4,7 +4,9 @@ using System.Linq;
 
 public class RankingManager : MonoBehaviour
 {
-    public static RankingManager Instance;
+    private static RankingManager _instance;
+
+    public static RankingManager Instance => _instance;
 
     [SerializeField, Header("ランキングの総表示数")]
     private int _rankingNum;
@@ -15,6 +17,19 @@ public class RankingManager : MonoBehaviour
     private string _filePath;
 
     public RankingBoard RankingBoard => _rankingBoard;
+
+    private void Awake()
+    {
+        if(_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     private void Start()
     {
