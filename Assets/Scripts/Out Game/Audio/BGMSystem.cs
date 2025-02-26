@@ -2,7 +2,6 @@ using Confront.Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class BGMSystem : MonoBehaviour
 {
     [SerializeField] AudioClip titleBGM;
@@ -16,12 +15,6 @@ public class BGMSystem : MonoBehaviour
         GameObject.DontDestroyOnLoad(this);
         AudioManager.PlayBGM(titleBGM,1f);
         SceneManager.activeSceneChanged += ActiveSceneChanged;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void ActiveSceneChanged(Scene thisScene, Scene nextScene)
