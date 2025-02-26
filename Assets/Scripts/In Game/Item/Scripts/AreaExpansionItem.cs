@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AreaExpansionItem : ItemController
 {
-    public float Duration;
     public float ExpansionAmount;
 
     public static float MinExpansionAmount = 0.4f;
@@ -15,6 +14,6 @@ public class AreaExpansionItem : ItemController
         var player = UFOController.Instance;
         var searchlight = player.Searchlight;
         var scale = searchlight.localScale;
-        searchlight.transform.localScale = new Vector3(scale.x + ExpansionAmount, scale.y, 1);
+        searchlight.localScale = new Vector3(scale.x + ExpansionAmount, scale.y, scale.z);
     }
 }

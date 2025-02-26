@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using System;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,9 +31,14 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
+        UpdateTimeLimit(UnityEngine.Time.deltaTime);
+    }
+
+    public void UpdateTimeLimit(float time)
+    {
         if (TimeLimit > 0)
         {
-            TimeLimit -= UnityEngine.Time.deltaTime;
+            TimeLimit -= time;
             if (TimeLimit <= 0)
             {
                 TimeLimit = 0;

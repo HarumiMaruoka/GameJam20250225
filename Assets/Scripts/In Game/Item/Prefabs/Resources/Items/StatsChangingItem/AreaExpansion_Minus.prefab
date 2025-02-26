@@ -136,7 +136,7 @@ MonoBehaviour:
   PickupSound: {fileID: 8300000, guid: ee5c1a8466d12b84b88fe29f65953f1a, type: 3}
   PickupAnimationDuration: 0.5
   Duration: 0
-  ExpansionAmount: 0
+  ExpansionAmount: -0.1
 --- !u!212 &4013859302990859071
 SpriteRenderer:
   m_ObjectHideFlags: 0

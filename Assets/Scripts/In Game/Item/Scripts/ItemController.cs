@@ -7,7 +7,8 @@ public class ItemController : MonoBehaviour
 {
     // Object pool
     [NonSerialized] public ItemSpawner Pool;
-    [NonSerialized] public int OriginalInstanceID;
+    [NonSerialized] public ItemController Original;
+    public int OriginalInstanceID => Original.GetInstanceID();
 
     [Header("Common")]
     public float Score = 10f;
@@ -85,6 +86,7 @@ public class ItemController : MonoBehaviour
         transform.localScale = startScale;
         ScorePopupSystem.Instance.ShowScorePopup(Score, ufo.transform.position);
         ScoreManager.AddScore(Score);
+        ItemCounter.AddItem(Original);
         Pool.ReturnToPool(this);
     }
 }

@@ -67,7 +67,7 @@ public class ItemSpawner : MonoBehaviour
         {
             instance = Instantiate(prefab, spawnPosition, Quaternion.identity, transform);
             instance.Pool = this;
-            instance.OriginalInstanceID = prefab.GetInstanceID();
+            instance.Original = prefab;
         }
         _activeItems.Add(instance);
     }
