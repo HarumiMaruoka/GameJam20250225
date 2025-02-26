@@ -1,26 +1,32 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Confront.Audio;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 public class FadeSystem : MonoBehaviour
 {
     [SerializeField, Tooltip("チェックが入っていればフェードイン、入ってなければフェードアウト")] bool fadeIn = true;
     [SerializeField, Tooltip("DelayTime")]private int _fadeDelayTime = 10;
     FadeImage fadeImage;
+    GameObject bgmPlayer;
+    BGMPlayer bGMPlayer;
 
     private const int _fadeLoop = 100;
     
     void Start()
     {
         fadeImage = GetComponent<FadeImage>();
+        bgmPlayer = GameObject.Find("BGMPlayer");
     }
 
     public async UniTask FadeIn()
     {
         fadeIn = true;
         await FadeIn_Out();
+        
     }
 
     public async UniTask FadeOut()
     {
+        AudioManager.StopBGM();
         fadeIn = false;
         await FadeIn_Out();
     }
@@ -40,5 +46,6 @@ public class FadeSystem : MonoBehaviour
                 await UniTask.Delay(_fadeDelayTime);
             }
         }
+        
     }
 }

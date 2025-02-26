@@ -21,6 +21,11 @@ namespace Confront.Audio
             _bgmPlayer.Play(clip, duration);
         }
 
+        public static void StopBGM()
+        {
+            _bgmPlayer.Stop(1);
+        }
+
         private static Camera _camera;
 
         public static void PlaySE(AudioClip clip)
