@@ -13,13 +13,16 @@ public class ItemController : MonoBehaviour
 
     [Header("Common")]
     public float Score = 10f;
+    public float Probability = 3f;
     public float Lifetime = 10f;
     public AudioClip PickupSound;
+    public CountItemType ItemType;
     [Header("Animation")]
     public float PickupAnimationDuration = 0.5f;
     public float SpawnAnimationDuration = 0.5f;
 
     private float _elapsedTime;
+    private Vector2 _defaultSize;
 
     public static Vector2 DeathPointLeftTopOffset = new Vector2(-15.0f, 10.0f);
     public static Vector2 DeathPointRightBottomOffset = new Vector2(15.0f, -10.0f);
@@ -30,6 +33,11 @@ public class ItemController : MonoBehaviour
     public virtual void OnPickup() { }
 
     private bool _isPickedUp = false;
+
+    protected virtual void Awake()
+    {
+        _defaultSize = transform.localScale;
+    }
 
     protected virtual void OnEnable()
     {
@@ -75,7 +83,6 @@ public class ItemController : MonoBehaviour
         _cancellationTokenSource = new CancellationTokenSource();
         var token = _cancellationTokenSource.Token;
 
-        var startScale = transform.localScale;
         transform.localScale = Vector3.zero;
 
         for (var timer = 0.0f; timer < SpawnAnimationDuration; timer += Time.deltaTime)
@@ -83,11 +90,11 @@ public class ItemController : MonoBehaviour
             if (!this) return;
             if (!enabled) break;
             if (token.IsCancellationRequested) break;
-            transform.localScale = Vector3.Lerp(Vector3.zero, startScale, timer / SpawnAnimationDuration);
+            transform.localScale = Vector3.Lerp(Vector3.zero, _defaultSize, timer / SpawnAnimationDuration);
             await UniTask.Yield();
         }
 
-        transform.localScale = startScale;
+        transform.localScale = _defaultSize;
     }
 
     private async void PickupAnimate()
@@ -120,4 +127,9 @@ public class ItemController : MonoBehaviour
         ItemCounter.AddItem(Original);
         Pool.ReturnToPool(this);
     }
+}
+
+public enum CountItemType
+{
+    None, Cow, Human, Pig, Chicken
 }
