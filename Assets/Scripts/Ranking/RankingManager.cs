@@ -7,11 +7,7 @@ public class RankingManager : MonoBehaviour
     private static RankingManager _instance;
 
     public static RankingManager Instance => _instance;
-
-    [SerializeField, Header("ランキングの総表示数")]
-    private int _rankingNum;
-
-    [SerializeField, Header("ランキングの保存先")]
+    private int _rankingNum = 10;
     private RankingBoard _rankingBoard = new RankingBoard();
 
     private string _filePath;
@@ -59,6 +55,16 @@ public class RankingManager : MonoBehaviour
         if (File.Exists(_filePath))
         {
             _rankingBoard = JsonUtility.FromJson<RankingBoard>(File.ReadAllText(_filePath));
+        }
+
+        float tmp = _rankingBoard.ranking.Count();
+
+        if (tmp < 11)
+        {
+            for (int i = 0; i < 11 - tmp; i++)
+            {
+                _rankingBoard.ranking.Add(new ScoreData("", 0));
+            }
         }
     }
 

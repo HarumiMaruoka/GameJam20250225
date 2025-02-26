@@ -184,29 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b209978fe2f142146aa4cd1ee2ec22fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rankingNum: 10
-  _rankingBoard:
-    ranking:
-    - _name: 
-      _score: 0
-    - _name: 
-      _score: 0
-    - _name: 
-      _score: 0
-    - _name: 
-      _score: 0
-    - _name: 
-      _score: 0
-    - _name: 
-      _score: 0
-    - _name: 
-      _score: 0
-    - _name: 
-      _score: 0
-    - _name: 
-      _score: 0
-    - _name: 
-      _score: 0
 --- !u!4 &661726728
 Transform:
   m_ObjectHideFlags: 0
@@ -711,7 +688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 773681315760916492, guid: e1c8bc610fff9b24dbea10ec913580b8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 849261723945857824, guid: e1c8bc610fff9b24dbea10ec913580b8, type: 3}
       propertyPath: Loop
@@ -1299,7 +1276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6147799685768958229, guid: e1c8bc610fff9b24dbea10ec913580b8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6453068941055728173, guid: e1c8bc610fff9b24dbea10ec913580b8, type: 3}
       propertyPath: m_AnchorMax.x
