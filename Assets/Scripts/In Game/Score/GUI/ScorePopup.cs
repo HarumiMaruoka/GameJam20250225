@@ -14,17 +14,22 @@ public class ScorePopup : MonoBehaviour
     private TMPro.TextMeshProUGUI _scoreText;
     [SerializeField]
     private Gradient _gradient;
+    [SerializeField]
+    private Gradient _shadowGradient;
 
+    private float _score;
     private float _timer = 0.0f;
     public event Action<ScorePopup> OnFinished;
 
     public void SetScore(float score)
     {
+        _score = score;
         _scoreText.text = score.ToString("F0");
     }
 
     private void OnEnable()
     {
+        if (_scoreText.text == "0") return;
         AnimateScorePopup();
     }
 
@@ -48,7 +53,14 @@ public class ScorePopup : MonoBehaviour
             if (token.IsCancellationRequested) break;
 
             transform.position += Vector3.up * _upwardSpeed * Time.deltaTime;
-            _scoreText.color = _gradient.Evaluate(_timer / _lifeTime);
+            if (_score > 0)
+            {
+                _scoreText.color = _gradient.Evaluate(_timer / _lifeTime);
+            }
+            else
+            {
+                _scoreText.color = _shadowGradient.Evaluate(_timer / _lifeTime);
+            }
             _timer += Time.deltaTime;
             await UniTask.Yield();
         }

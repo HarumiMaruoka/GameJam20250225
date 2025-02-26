@@ -4,16 +4,16 @@ using UnityEngine;
 public class ItemMove : MonoBehaviour
 {
     [Header("Speed")]
-    public float MaxSpeed;
-    public float Acceleration;
-    public float Deceleration;
+    public float MaxSpeed = 2f;
+    public float Acceleration = 12f;
+    public float Deceleration = 8f;
     [Header("Stop")]
-    public float MinStopDuration;
-    public float MaxStopDuration;
+    public float MinStopDuration = 2.5f;
+    public float MaxStopDuration = 5f;
     [Header("Move")]
-    public float MinMoveDuration;
-    public float MaxMoveDuration;
-    public float NoiseScale;
+    public float MinMoveDuration = 3f;
+    public float MaxMoveDuration = 6f;
+    public float NoiseScale = 0.1f;
 
     private Vector2 _velocity;
 

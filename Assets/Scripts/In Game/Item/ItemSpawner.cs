@@ -55,7 +55,7 @@ public class ItemSpawner : MonoBehaviour
 
     private void SpawnItem()
     {
-        var spawnPosition = GetRandomPosition();
+        var spawnPosition = UFOController.Instance.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * UnityEngine.Random.Range(_minSpawnRange, _maxSpawnRange);
         var prefab = GetRandomItem();
 
         if (TryGetItemFromPool(prefab, out ItemController instance))
@@ -93,28 +93,6 @@ public class ItemSpawner : MonoBehaviour
         _activeItems.Remove(item);
     }
 
-    private Vector3 GetRandomPosition()
-    {
-        var edge = (Edge)UnityEngine.Random.Range(0, 4);
-        Vector2 result;
-        switch (edge)
-        {
-            case Edge.Top:
-                result = new Vector3(UnityEngine.Random.Range(ScreenLeftTop.x, ScreenRightBottom.x), ScreenLeftTop.y, 0); break;
-            case Edge.Bottom:
-                result = new Vector3(UnityEngine.Random.Range(ScreenLeftTop.x, ScreenRightBottom.x), ScreenRightBottom.y, 0); break;
-            case Edge.Left:
-                result = new Vector3(ScreenLeftTop.x, UnityEngine.Random.Range(ScreenRightBottom.y, ScreenLeftTop.y), 0); break;
-            case Edge.Right:
-                result = new Vector3(ScreenRightBottom.x, UnityEngine.Random.Range(ScreenRightBottom.y, ScreenLeftTop.y), 0); break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-
-        result += UnityEngine.Random.insideUnitCircle * UnityEngine.Random.Range(_minSpawnRange, _maxSpawnRange);
-        return result;
-    }
-
     private ItemController GetRandomItem()
     {
         float totalProbability = 0;
@@ -141,12 +119,6 @@ public class ItemSpawnData
 {
     public ItemController Item;
     public float Probability;
-}
-
-[SerializeField]
-public enum Edge
-{
-    Top, Bottom, Left, Right
 }
 
 #if UNITY_EDITOR
