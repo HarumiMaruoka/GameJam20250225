@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1979877578649300739}
   - component: {fileID: 8408193263326318721}
   - component: {fileID: 2578740592273927018}
+  - component: {fileID: -1325086206372462136}
   m_Layer: 0
   m_Name: chicken2
   m_TagString: Untagged
@@ -162,3 +163,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3.61
+--- !u!114 &-1325086206372462136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844878703020515714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40da954cc4454c4986a355ba05e6c22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxSpeed: 2
+  Acceleration: 12
+  Deceleration: 8
+  MinStopDuration: 2.5
+  MaxStopDuration: 5
+  MinMoveDuration: 3
+  MaxMoveDuration: 6
+  NoiseScale: 0.1
