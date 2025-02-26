@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TemporaryBoostItem : ItemController
 {
+    [Header("Boost Settings")]
     public float boostDuration = 5f;
 
     public float MaxSpeedBoost = 1.0f;
