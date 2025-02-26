@@ -12,9 +12,9 @@ public class UFOStatsView : MonoBehaviour
     {
         _view.text =
             $"Stats\n" +
-            $"  Max Speed: {_ufoController.MaxSpeed}\n" +
-            $"  Acceleration: {_ufoController.Acceleration}\n" +
-            $"  Rotation Speed: {_ufoController.RotationSpeed}\n" +
-            $"  Deceleration: {_ufoController.Deceleration}";
+            $"  ç≈çÇë¨ìx: {_ufoController.MaxSpeed}\n" +
+            $"  â¡ë¨óÕ: {_ufoController.Acceleration}\n" +
+            $"  ê˘âÒóÕ: {_ufoController.RotationSpeed}\n" +
+            $"  å∏ë¨óÕ: {_ufoController.Deceleration}";
     }
 }

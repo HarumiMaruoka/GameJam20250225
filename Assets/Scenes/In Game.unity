@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Stats\n  \u6700\u9AD8\u901F\u5EA6:999\n  \u52A0\u901F\u529B:999\n  \u56DE\u8EE2\u529B:999\n 
+  m_text: "Stats\n  \u6700\u9AD8\u901F\u5EA6:999\n  \u52A0\u901F\u529B:999\n  \u65CB\u56DE\u529B:999\n 
     \u6E1B\u901F\u529B:999"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a14b6f3d3f7ace84fb80063c8eeaf336, type: 2}
