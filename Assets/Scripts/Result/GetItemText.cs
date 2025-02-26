@@ -6,12 +6,9 @@ public class GetItemText : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] _texts;
     void Start()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            _texts[i].text = ItemCounter.ItemCounts[CountItemType.Human].ToString();
-            _texts[i].text = ItemCounter.ItemCounts[CountItemType.Chicken].ToString();
-            _texts[i].text = ItemCounter.ItemCounts[CountItemType.Cow].ToString();
-            _texts[i].text = ItemCounter.ItemCounts[CountItemType.Pig].ToString();
-        }
+            _texts[0].text = ItemCounter.ItemCounts[CountItemType.Human].ToString();
+            _texts[1].text = ItemCounter.ItemCounts[CountItemType.Chicken].ToString();
+            _texts[2].text = ItemCounter.ItemCounts[CountItemType.Cow].ToString();
+            _texts[3].text = ItemCounter.ItemCounts[CountItemType.Pig].ToString();
     }
 }
