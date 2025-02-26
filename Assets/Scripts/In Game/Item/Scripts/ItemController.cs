@@ -18,8 +18,8 @@ public class ItemController : MonoBehaviour
     public AudioClip PickupSound;
     public CountItemType ItemType;
     [Header("Animation")]
-    public float PickupAnimationDuration = 0.5f;
     public float SpawnAnimationDuration = 0.5f;
+    public float PickupAnimationDuration = 0.5f;
 
     private float _elapsedTime;
     private Vector2 _defaultSize;
