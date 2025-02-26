@@ -4,7 +4,8 @@ using UnityEngine;
 public class TitleRanking : MonoBehaviour
 {
     [SerializeField] private int rankingNum = 10;　//仮
-    [SerializeField] private TextMeshProUGUI[] rankingTexts;
+    [SerializeField] private TextMeshProUGUI[] _userNameTexts;
+    [SerializeField] private TextMeshProUGUI[] _scoreTexts;
 
     private void Start()
     {
@@ -18,7 +19,8 @@ public class TitleRanking : MonoBehaviour
             var val = RankingManager.Instance.RankingBoard.ranking[i - 1];
             string userName = val._name;
             float score = val._score;
-            rankingTexts[i - 1].text = $"{i}位 : {userName} , score{score}pt";
+            _userNameTexts[i - 1].text = $"{userName}";
+            _scoreTexts[i - 1].text = $"{score}";
         }
     }
 }
