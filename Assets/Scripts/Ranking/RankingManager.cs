@@ -16,8 +16,6 @@ public class RankingManager : MonoBehaviour
 
     private string _filePath;
 
-    public string UserName;
-
     public RankingBoard RankingBoard => _rankingBoard;
 
     private void Awake()
@@ -58,16 +56,11 @@ public class RankingManager : MonoBehaviour
         if (File.Exists(_filePath))
         {
             _rankingBoard = JsonUtility.FromJson<RankingBoard>(File.ReadAllText(_filePath));
-            Debug.Log(_filePath + "にデータがあるよ");
 
             foreach(var data  in _rankingBoard.ranking)
             {
                 Debug.Log(data.Name + ":" + data.Score);
             }
-        }
-        else
-        {
-            Debug.Log("何もないよ");
         }
     }
 
@@ -78,7 +71,6 @@ public class RankingManager : MonoBehaviour
     {
         //ランキングにスコアを追加
         _rankingBoard.ranking.Add(new ScoreData(userName, score));
-        Debug.Log("Scoreを追加");
 
         //ランキングを降順ソート
         _rankingBoard.ranking = _rankingBoard.ranking.OrderByDescending(x => x.Score).ToList();
@@ -94,17 +86,12 @@ public class RankingManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Debug用のデータ消去関数
+    /// データ消去関数
     /// </summary>
     public void DataDelete()
     {
         File.Delete(_filePath);
         _rankingBoard.ranking.Clear();
         _rankingBoard = new();
-    }
-
-    public void UserNameSet(string value)
-    {
-        UserName = value;
     }
 }
