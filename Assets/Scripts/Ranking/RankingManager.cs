@@ -4,6 +4,8 @@ using System.Linq;
 
 public class RankingManager : MonoBehaviour
 {
+    public static RankingManager Instance;
+
     [SerializeField, Header("ランキングの総表示数")]
     private int _rankingNum;
 
@@ -23,6 +25,7 @@ public class RankingManager : MonoBehaviour
     private void Update()
     {
         //"P"Keyが押されたらData消去
+        //Buildするときに消してね
         if (UnityEngine.Input.GetKeyDown(KeyCode.P))
         {
             DataDelete();
