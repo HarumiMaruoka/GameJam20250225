@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace Confront.Audio
     {
         private GameObject _sePlayerObject;
         private AudioSource _seAudioSource;
+
+        private const int MaxAudioSourceCount = 5;
 
         private HashSet<AudioSource> _activeAudioSources = new HashSet<AudioSource>();
         private Stack<AudioSource> _availableAudioSources = new Stack<AudioSource>();
@@ -23,6 +26,8 @@ namespace Confront.Audio
 
         public void Play(AudioClip clip)
         {
+            if (_activeAudioSources.Count >= MaxAudioSourceCount) return;
+
             if (!_camera) _camera = Camera.main;
             var volume = AudioManager.VolumeParameters.SeVolume;
 
@@ -35,6 +40,8 @@ namespace Confront.Audio
 
         public void Play(AudioClip clip, Vector3 position)
         {
+            if (_activeAudioSources.Count >= MaxAudioSourceCount) return;
+
             var volume = AudioManager.VolumeParameters.SeVolume;
 
             AudioSource audioSource = GetAvailableAudioSource();
@@ -51,7 +58,6 @@ namespace Confront.Audio
                 return _availableAudioSources.Pop();
             }
             AudioSource audioSource = GameObject.Instantiate(_seAudioSource, _sePlayerObject.transform);
-            // GameObject.DontDestroyOnLoad(audioSource);
             audioSource.transform.SetParent(_sePlayerObject.transform);
             _activeAudioSources.Add(audioSource);
             return audioSource;
@@ -67,21 +73,26 @@ namespace Confront.Audio
 
         private HashSet<AudioSource> _removeAudioSources = new HashSet<AudioSource>();
 
-        public void Update()
+        public async void UpdateAsync()
         {
-            foreach (AudioSource audioSource in _activeAudioSources)
+            while (Application.isPlaying)
             {
-                if (!audioSource.isPlaying)
+                foreach (AudioSource audioSource in _activeAudioSources)
                 {
-                    ReturnAudioSource(audioSource);
+                    if (!audioSource.isPlaying)
+                    {
+                        ReturnAudioSource(audioSource);
+                    }
                 }
-            }
 
-            foreach (AudioSource audioSource in _removeAudioSources)
-            {
-                _activeAudioSources.Remove(audioSource);
+                foreach (AudioSource audioSource in _removeAudioSources)
+                {
+                    _activeAudioSources.Remove(audioSource);
+                }
+                _removeAudioSources.Clear();
+
+                await UniTask.Yield();
             }
-            _removeAudioSources.Clear();
         }
     }
 }

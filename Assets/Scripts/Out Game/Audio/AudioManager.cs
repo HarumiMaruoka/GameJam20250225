@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 namespace Confront.Audio
@@ -14,6 +15,7 @@ namespace Confront.Audio
         private static void Initialize()
         {
             VolumeParameters.OnBgmVolumeChanged += _bgmPlayer.ChangeVolume;
+            _sePlayer.UpdateAsync();
         }
 
         public static void PlayBGM(AudioClip clip, float duration = 1f)
@@ -23,7 +25,7 @@ namespace Confront.Audio
 
         public static void StopBGM()
         {
-            _bgmPlayer.Stop(1);
+            _bgmPlayer.Stop(1).Forget();
         }
 
         private static Camera _camera;
@@ -31,8 +33,7 @@ namespace Confront.Audio
         public static void PlaySE(AudioClip clip)
         {
             if (!_camera) _camera = Camera.main;
-
-            AudioSource.PlayClipAtPoint(clip, _camera.transform.position, AudioManager.VolumeParameters.SeVolume);
+            _sePlayer.Play(clip, _camera.transform.position);
         }
 
         public static void PlaySE(AudioClip clip, Vector3 position)

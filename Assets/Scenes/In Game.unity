@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e518c1aea5c820741a35df1d2e8e7ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpawnRange: 30
+  _minSpawnRange: 15
   _maxSpawnRange: 100
   _minSpawnTime: 0
   _maxSpawnTime: 0.333
