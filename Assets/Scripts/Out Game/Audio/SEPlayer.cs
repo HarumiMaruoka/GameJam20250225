@@ -33,9 +33,8 @@ namespace Confront.Audio
 
             AudioSource audioSource = GetAvailableAudioSource();
             audioSource.transform.position = _camera.transform.position;
-            audioSource.clip = clip;
             audioSource.volume = volume;
-            audioSource.Play();
+            audioSource.PlayOneShot(clip);
         }
 
         public void Play(AudioClip clip, Vector3 position)
@@ -46,9 +45,8 @@ namespace Confront.Audio
 
             AudioSource audioSource = GetAvailableAudioSource();
             audioSource.transform.position = position;
-            audioSource.clip = clip;
             audioSource.volume = volume;
-            audioSource.Play();
+            audioSource.PlayOneShot(clip);
         }
 
         private AudioSource GetAvailableAudioSource()

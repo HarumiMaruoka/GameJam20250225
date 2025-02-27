@@ -20,6 +20,8 @@ public class ScorePopupSystem : MonoBehaviour
 
     public void ShowScorePopup(float score, Vector3 worldPosition)
     {
+        if (score == 0) return;
+
         ScorePopup scorePopup;
         if (_pool.Count > 0)
         {

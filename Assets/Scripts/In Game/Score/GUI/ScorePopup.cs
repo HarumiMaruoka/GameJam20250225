@@ -29,7 +29,6 @@ public class ScorePopup : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_scoreText.text == "0") return;
         AnimateScorePopup();
     }
 
